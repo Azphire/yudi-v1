@@ -15,7 +15,6 @@ SECRET_KEY = '4OHO7ClRWVKgi7S9mgkK4P5oSINFki0W'
 
 client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
-
 # Use SpeechRecognition to record
 def rec(rate=16000):
     r = sr.Recognizer()
@@ -81,6 +80,13 @@ def running():
             application.ui.call_backlog("Already taken down!")
             take_record(request)
         elif request.lower().find("雨滴") != -1:
+            result = client.synthesis('Hi，我是语滴', 'zh', 1, {
+                'vol': 5,
+            })
+            if not isinstance(result, dict):
+                with open('audio.mp3', 'wb') as f:
+                    f.write(result)
+            playsound("audio.mp3")
             print("唤醒！")
             # application.ui.call_backlog("Playing music!")
             # play_music()
