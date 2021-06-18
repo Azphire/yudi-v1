@@ -7,6 +7,10 @@ from playsound import playsound
 from datetime import datetime
 import speech_recognition as sr
 from aip import AipSpeech
+import question
+import game
+import reciteWhole
+import reciteBySentence
 
 # Baidu Speech API
 APP_ID = '24398244'
@@ -14,6 +18,7 @@ API_KEY = 'tvMrgpcmEeKiAPDWfhAG0EKl'
 SECRET_KEY = '4OHO7ClRWVKgi7S9mgkK4P5oSINFki0W'
 
 client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
+
 
 # Use SpeechRecognition to record
 def rec(rate=16000):
@@ -59,33 +64,30 @@ def running():
         print("I heard: " + request)
 
         if flag:
-            sentence = ''
+            flag = False
             if request.find("背课文") != -1:
                 application.ui.call_backlog("背课文!")
-                sentence = "好的，我们开始全文背诵"
-                flag = False
+                reciteWhole.recite_whole(client)
             elif request.find("跟背") != -1:
                 application.ui.call_backlog("逐句跟背!")
-                sentence = "好的，我们开始逐句跟背"
-                flag = False
+                reciteBySentence.recite_by_sentence(client)
             elif request.find("游戏") != -1:
                 application.ui.call_backlog("游戏!")
-                sentence = "好的，我们来玩游戏吧"
-                flag = False
+                game.play_game(client)
             elif request.find("题") != -1:
                 application.ui.call_backlog("做题!")
-                sentence = "好的，现在开始做题"
-                flag = False
+                question.answer_questions(client)
             else:
+                flag = True
                 sentence = "对不起，我没听懂你想做什么，可以再说一遍吗"
-            result = client.synthesis(sentence, 'zh', 1, {
-                'vol': 5, 'per': 0, 'spd': 5
-            })
-            if not isinstance(result, dict):
-                with open('audio.mp3', 'wb') as f:
-                    f.write(result)
-            playsound("audio.mp3")
-            os.remove("audio.mp3")
+                result = client.synthesis(sentence, 'zh', 1, {
+                    'vol': 5, 'per': 0, 'spd': 5
+                })
+                if not isinstance(result, dict):
+                    with open('audio.mp3', 'wb') as f:
+                        f.write(result)
+                playsound("audio.mp3")
+                os.remove("audio.mp3")
 
         else:
             if request.find("雨滴") != -1:
