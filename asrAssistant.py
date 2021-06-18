@@ -9,9 +9,9 @@ import speech_recognition as sr
 from aip import AipSpeech
 
 # Baidu Speech API
-APP_ID = '24146606'
-API_KEY = 'RmKEOP2GbCN1AokIt5In2GAT'
-SECRET_KEY = 'X13eEb1ZLFiuwRqa0H0wiHN19bPP8cXZ'
+APP_ID = '24398244'
+API_KEY = 'tvMrgpcmEeKiAPDWfhAG0EKl'
+SECRET_KEY = '4OHO7ClRWVKgi7S9mgkK4P5oSINFki0W'
 
 client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
@@ -40,7 +40,7 @@ def listen():
 
     # 获取语音识别api结果
     result = client.asr(audio_data, 'wav', 16000, {
-        'dev_pid': 1737,
+        'dev_pid': 1537,
     })
 
     # 提取出识别文本
@@ -77,13 +77,14 @@ def running():
         request = listen()
         print("I heard: " + request)
 
-        if request.lower().find("take down") != -1:
+        if request.lower().find("记录") != -1:
             application.ui.call_backlog("Already taken down!")
             take_record(request)
-        elif request.lower().find("play music") != -1:
-            application.ui.call_backlog("Playing music!")
-            play_music()
-        elif request.lower().find("open notepad") != -1 or request.lower().find("open note pad") != -1:
+        elif request.lower().find("雨滴") != -1:
+            print("唤醒！")
+            # application.ui.call_backlog("Playing music!")
+            # play_music()
+        elif request.lower().find("打开记事本") != -1:
             application.ui.call_backlog("Open Notepad!")
             open_notepad()
         else:
