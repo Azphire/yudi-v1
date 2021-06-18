@@ -51,50 +51,54 @@ def listen():
         return "error"
 
 
-def play_music():
-    playsound("music.mp3")
-
-
-def open_notepad():
-    time = datetime.now()
-    file = 'note' + time.strftime('%Y%m%d%H%M%S') + '.txt'
-    with open(file, 'w+') as f:
-        print('记录于：\n' + time.strftime('%Y-%m-%d %H:%M:%S'), file=f)
-    os.system(file)
-
-
-def take_record(record):
-    time = datetime.now().strftime('%Y%m%d%H%M%S')
-    with open('record' + time + '.txt', 'w+') as f:
-        f.write(record)
-        f.close()
-
-
 def running():
+    flag = False
     while True:
         rec()
         request = listen()
         print("I heard: " + request)
 
-        if request.lower().find("记录") != -1:
-            application.ui.call_backlog("Already taken down!")
-            take_record(request)
-        elif request.lower().find("雨滴") != -1:
-            result = client.synthesis('Hi，我是语滴', 'zh', 1, {
-                'vol': 5,
+        if flag:
+            sentence = ''
+            if request.find("背课文") != -1:
+                application.ui.call_backlog("背课文!")
+                sentence = "好的，我们开始全文背诵"
+                flag = False
+            elif request.find("跟背") != -1:
+                application.ui.call_backlog("逐句跟背!")
+                sentence = "好的，我们开始逐句跟背"
+                flag = False
+            elif request.find("游戏") != -1:
+                application.ui.call_backlog("游戏!")
+                sentence = "好的，我们来玩游戏吧"
+                flag = False
+            elif request.find("题") != -1:
+                application.ui.call_backlog("做题!")
+                sentence = "好的，现在开始做题"
+                flag = False
+            else:
+                sentence = "对不起，我没听懂你想做什么，可以再说一遍吗"
+            result = client.synthesis(sentence, 'zh', 1, {
+                'vol': 5, 'per': 0, 'spd': 5
             })
             if not isinstance(result, dict):
                 with open('audio.mp3', 'wb') as f:
                     f.write(result)
             playsound("audio.mp3")
-            print("唤醒！")
-            # application.ui.call_backlog("Playing music!")
-            # play_music()
-        elif request.lower().find("打开记事本") != -1:
-            application.ui.call_backlog("Open Notepad!")
-            open_notepad()
+            os.remove("audio.mp3")
+
         else:
-            application.ui.call_backlog("I didn’t catch you.")
+            if request.find("雨滴") != -1:
+                result = client.synthesis('你好，我是语滴，请问你想做什么', 'zh', 1, {
+                    'vol': 5, 'per': 0, 'spd': 5
+                })
+                if not isinstance(result, dict):
+                    with open('audio.mp3', 'wb') as f:
+                        f.write(result)
+                playsound("audio.mp3")
+                os.remove("audio.mp3")
+                print("唤醒！")
+                flag = True
 
 
 class MyWindow(QtWidgets.QMainWindow):
