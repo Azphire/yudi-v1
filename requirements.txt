@@ -7,8 +7,7 @@ click==7.1.2
 demjson==2.2.4
 idna==2.10
 playsound==1.2.2
-pocketsphinx==0.1.15
-PyAudio==0.2.11
+PyAudio @ file:///D:/Projects/PythonProjects/Yudi/PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
 pycparser==2.20
 pygit2==1.5.0
 PyQt5==5.15.2
