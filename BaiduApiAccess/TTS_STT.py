@@ -13,7 +13,7 @@ client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
 def say(sentence):
     result = client.synthesis(sentence, 'zh', 1, {
-        'vol': 5, 'per': 0, 'spd': 5
+        'vol': 5, 'per': 0, 'spd': 7
     })
     if not isinstance(result, dict):
         with open('audio.mp3', 'wb') as f:
@@ -23,12 +23,13 @@ def say(sentence):
 
 
 # Use SpeechRecognition to record
-def rec(rate=16000):
+def rec(rate=16000, ding=True):
     r = sr.Recognizer()
     with sr.Microphone(sample_rate=rate) as source:
-        print("please say something")
+        print("listening...")
         # playsoud只能使用相对于调用listen的文件的路径（不是相对TTS_STT.py的路径），所以当文件深度不一样时调用失败
-        playsound('../resourse/sound/ding.wav')
+        if ding:
+            playsound('../resourse/sound/ding.wav')
         audio = r.listen(source)
 
     with open("temp.wav", "wb") as f:
@@ -36,9 +37,8 @@ def rec(rate=16000):
         f.write(audio.get_wav_data())
 
 
-# TODO: 加一个参数决定要不要播放ding
-def listen():
-    rec()
+def listen(ding=True):
+    rec(ding=ding)
     with open('temp.wav', 'rb') as f:
         audio_data = f.read()
 
@@ -53,7 +53,7 @@ def listen():
     # 提取出识别文本
     try:
         result_text = result["result"][0]
-        print(result_text)
+        print("I heard: " + result_text)
         return result_text
     except:
         return "error"

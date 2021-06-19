@@ -39,4 +39,4 @@ if __name__=="__main__":
     # for t in titles.keys():
     #     print(t,titles[t])
 
-    print(getCHNQuestionByGrade(6))
+    print(getCHNQuestions())

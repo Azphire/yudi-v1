@@ -53,4 +53,7 @@ def getGamePlot(id):
 if __name__=="__main__":
     print(getGames())
     print(getGameByTitle("黑暗森林"))
-    print(getGamePlot(1))
+    plot = getGamePlot(1)
+    print(plot["choices"])
+    for k,v in plot["choices"].items():
+        print(k,v)
