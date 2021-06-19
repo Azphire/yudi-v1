@@ -24,14 +24,17 @@ class MySQLConnection(object):
 
     # 3. 对于数据库进行增删改查
     def alter_record(self, sqli):
+        res={}
         ## 1). *********************增删改数据****************************
         try:
             self.cur.execute(sqli)
             self.conn.commit()
         except Exception as e:
-            print(sqli+"执行失败:", e)
+            res={"status":500,"message":"执行失败","sql":sqli,"exception:":e}
         else:
-            print(sqli+"执行成功;")
+            res={"status":200,"message":"执行成功","sql":sqli}
+        finally:
+            return res
 
     def insert_multi_records(self, insert_sqli,info):
         """
@@ -40,6 +43,7 @@ class MySQLConnection(object):
         :param info: info = [(i, "westos%s" %(i)) for i in range(100)]
         :return:
         """
+        res={}
         # 2). *********************插入多条数据****************************
         try:
             # *********************第一种方式********************
@@ -54,25 +58,33 @@ class MySQLConnection(object):
             self.cur.executemany(insert_sqli, info)
             self.conn.commit()
         except Exception as e:
-            print("插入多条数据失败:", e)
-        else:
-            # 如果是插入数据， 一定要提交数据， 不然数据库中找不到要插入的数据;
             self.conn.rollback()
-            print("插入多条数据成功;")
+            res={"status":500,"message":"插入多条数据失败","sql":insert_sqli,"exception:":e}
+        else:
+            res={"status":200,"message":"插入多条数据成功","sql":insert_sqli}
+        finally:
+            return res
 
     def select_record(self,sqli):
+        res={}
         # 3). **************************数据库查询*****************************
-        result = self.cur.execute(sqli)  # 默认不返回查询结果集， 返回数据记录数。
-        # print(result)
-        # print(self.cur.fetchone())  # 1). 获取下一个查询结果集;
-        # print(self.cur.fetchone())
-        # print(self.cur.fetchone())
-        # print(self.cur.fetchmany(4))  # 2). 获取制定个数个查询结果集；
-        info = self.cur.fetchall()  # 3). 获取所有的查询结果
-        print(info)
-        print(len(info))
-        print(self.cur.rowcount)  # 4). 返回执行sql语句影响的行数
-        return info
+        try:
+            result = self.cur.execute(sqli)  # 默认不返回查询结果集， 返回数据记录数。
+            # print(result)
+            # print(self.cur.fetchone())  # 1). 获取下一个查询结果集;
+            # print(self.cur.fetchone())
+            # print(self.cur.fetchone())
+            # print(self.cur.fetchmany(4))  # 2). 获取制定个数个查询结果集；
+            infos = self.cur.fetchall()  # 3). 获取所有的查询结果
+            # print(info)
+            # print(len(info))
+            # print(self.cur.rowcount)  # 4). 返回执行sql语句影响的行数
+        except Exception as e:
+            res = {"status": 500, "message": "查询失败", "sql": sqli, "exception": e}
+        else:
+            res = {"status": 200, "message": "查询成功", "sql": sqli,"data":infos}
+        finally:
+            return res
 
         # #  5). 移动游标指针
         # print(self.cur.fetchmany(3))

@@ -1,17 +1,10 @@
-import os
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 import _thread
 from asrInterface import Ui_MainWindow
 import sys
-from playsound import playsound
-from datetime import datetime
-import speech_recognition as sr
-from aip import AipSpeech
-import question
-import game
-import reciteWhole
+from Funtion import game, question, reciteWhole
 import reciteBySentence
-from TTS_STT import say, listen
+from BaiduApiAccess.TTS_STT import say, listen
 from xpinyin import Pinyin
 
 def running():
