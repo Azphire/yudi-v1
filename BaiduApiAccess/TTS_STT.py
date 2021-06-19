@@ -27,6 +27,8 @@ def rec(rate=16000):
     r = sr.Recognizer()
     with sr.Microphone(sample_rate=rate) as source:
         print("please say something")
+        # playsoud只能使用相对于调用listen的文件的路径（不是相对TTS_STT.py的路径），所以当文件深度不一样时调用失败
+        playsound('../resourse/sound/ding.wav')
         audio = r.listen(source)
 
     with open("temp.wav", "wb") as f:
@@ -34,6 +36,7 @@ def rec(rate=16000):
         f.write(audio.get_wav_data())
 
 
+# TODO: 加一个参数决定要不要播放ding
 def listen():
     rec()
     with open('temp.wav', 'rb') as f:
@@ -50,6 +53,7 @@ def listen():
     # 提取出识别文本
     try:
         result_text = result["result"][0]
+        print(result_text)
         return result_text
     except:
         return "error"
