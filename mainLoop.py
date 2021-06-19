@@ -2,8 +2,7 @@ from PyQt5 import QtWidgets
 import _thread
 from asrInterface import Ui_MainWindow
 import sys
-from Funtion import game, question, reciteWhole
-import reciteBySentence
+from Funtion import game, question, reciteWhole, reciteBySentence
 from BaiduApiAccess.TTS_STT import say, listen
 from xpinyin import Pinyin
 
