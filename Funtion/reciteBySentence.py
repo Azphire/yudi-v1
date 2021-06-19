@@ -12,16 +12,16 @@ def recite_by_sentence():
 
     # 询问要背哪首诗
     titles = getCHNPassageTitles()
-    passage_id=random.choice(list(titles.values()))
+    passageId=random.choice(list(titles.values()))
     say("请问你要背哪首诗")
     text=listen().replace('。','')
     # text=input("输入诗的题目：")
     if text in titles.keys():
-        passage_id=titles[text]
+        passageId=titles[text]
     else:
         say("没有您要背的诗哦，我们随机背一首吧")
 
-    passage=getCHNPassageById(passage_id)
+    passage=getCHNPassageById(passageId)
     # print(passage)
     say(passage['title'])
     say(passage['writer'])
