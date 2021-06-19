@@ -1,16 +1,17 @@
 from PyQt5 import QtWidgets
 import _thread
-from asrInterface import Ui_MainWindow
 import sys
-from Function import game, question, reciteWhole, reciteBySentence
+from Funtion import game, question, reciteWhole, reciteBySentence
 from BaiduApiAccess.TTS_STT import say, listen
 from xpinyin import Pinyin
 
+# TODO: 逐句跟背的识别，audio的命名
 def running():
     flag = False
     while True:
+        
         request = listen(ding=False)
-
+        print("主线程在运行。")
         if flag:
             flag = False
             if request.find("背课文") != -1:
@@ -32,17 +33,3 @@ def running():
                 print("唤醒！")
                 flag = True
 
-
-class MyWindow(QtWidgets.QMainWindow):
-
-    def __init__(self):
-        super(MyWindow, self).__init__()
-        _thread.start_new_thread(running, ())
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-
-
-app = QtWidgets.QApplication([])
-application = MyWindow()
-application.show()
-sys.exit(app.exec())
