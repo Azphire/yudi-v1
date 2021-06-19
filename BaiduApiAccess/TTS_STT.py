@@ -13,7 +13,7 @@ client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
 def say(sentence):
     result = client.synthesis(sentence, 'zh', 1, {
-        'vol': 5, 'per': 0, 'spd': 7
+        'vol': 5, 'per': 0, 'spd': 5
     })
     if not isinstance(result, dict):
         with open('audio.mp3', 'wb') as f:
