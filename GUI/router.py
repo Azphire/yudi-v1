@@ -3,11 +3,12 @@ from subui_one import*
 from subui_two import*
 from subui_three import*
 import sys
-sys.path.append(r'D:\\UCI\\YUDI-V1-MAIN')
-import Funtion.reciteBySentence as rs
-import Funtion.game as gm
-import Funtion.question as qa
-import Funtion.reciteWhole as rw
+# sys.path.append(r'D:\\UCI\\YUDI-V1-MAIN')
+sys.path.append(os.path.abspath('..'))
+import Function.reciteBySentence as rs
+import Function.game as gm
+import Function.question as qa
+import Function.reciteWhole as rw
 from PyQt5.QtWidgets import QApplication,QMainWindow,QDialog,QMessageBox
 import os
 from PyQt5.QtCore import pyqtSignal,QThread

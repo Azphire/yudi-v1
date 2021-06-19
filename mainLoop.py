@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 import _thread
 import sys
-from Funtion import game, question, reciteWhole, reciteBySentence
+from Function import game, question, reciteWhole, reciteBySentence
 from BaiduApiAccess.TTS_STT import say, listen
 from xpinyin import Pinyin
 
@@ -16,7 +16,7 @@ def running():
             flag = False
             if request.find("背课文") != -1:
                 reciteWhole.recite_whole()
-            elif request.find("跟背") != -1:
+            elif Pinyin().get_pinyin(request, ' ').find("gen bei") != -1:
                 reciteBySentence.recite_by_sentence()
             elif request.find("游戏") != -1:
                 game.play_game()
