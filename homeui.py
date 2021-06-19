@@ -1,15 +1,14 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
 import sys
 import qtawesome
+import os
+from PyQt5.QtCore import pyqtSignal
 
 class MainUi(QtWidgets.QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.init_ui()
-
-    def init_ui(self):
-        self.setFixedSize(1200,740)
-        self.main_widget = QtWidgets.QWidget()  # 创建窗口主部件
+    def setupUi(self,MainWindow):
+        MainWindow.setFixedSize(1200,740)
+        MainWindow.setObjectName("MainWindow")
+        self.main_widget = QtWidgets.QWidget(MainWindow)  # 创建窗口主部件
         self.main_layout = QtWidgets.QGridLayout()  # 创建主部件的网格布局
         self.main_widget.setLayout(self.main_layout)  # 设置窗口主部件布局为网格布局
 
@@ -25,7 +24,7 @@ class MainUi(QtWidgets.QMainWindow):
 
         self.main_layout.addWidget(self.left_widget,0,0,12,2) # 左侧部件在第0行第0列，占8行3列
         self.main_layout.addWidget(self.right_widget,0,2,12,10) # 右侧部件在第0行第3列，占8行9列
-        self.setCentralWidget(self.main_widget) # 设置窗口主部件
+        MainWindow.setCentralWidget(self.main_widget) # 设置窗口主部件
 
         self.left_close = QtWidgets.QPushButton("") # 关闭按钮
         self.left_visit = QtWidgets.QPushButton("") # 空白按钮
@@ -157,31 +156,31 @@ class MainUi(QtWidgets.QMainWindow):
         self.right_newquestion_layout.addWidget(self.newquestion_button_5, 4, 1, )
         self.right_newquestion_layout.addWidget(self.newquestion_button_6, 5, 1, )
 
-        self.right_playlist_widget = QtWidgets.QWidget() # 播放歌单部件
-        self.right_playlist_layout = QtWidgets.QGridLayout() # 播放歌单网格布局
+        self.right_playlist_widget = QtWidgets.QWidget() 
+        self.right_playlist_layout = QtWidgets.QGridLayout() 
         self.right_playlist_widget.setLayout(self.right_playlist_layout)
 
         self.playlist_button_1 = QtWidgets.QToolButton()
-        self.playlist_button_1.setText("耳听为实")
-        self.playlist_button_1.setIcon(QtGui.QIcon('icon/1.jpg'))
+        self.playlist_button_1.setText("体验一段小说中的剧情~")
+        self.playlist_button_1.setIcon(QtGui.QIcon('icon/game.jpg'))
         self.playlist_button_1.setIconSize(QtCore.QSize(120, 100))
         self.playlist_button_1.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_2 = QtWidgets.QToolButton()
-        self.playlist_button_2.setText("不需要歌词,也可以打动你的心")
-        self.playlist_button_2.setIcon(QtGui.QIcon('./p2.jpg'))
+        self.playlist_button_2.setText("生死存亡之际，你会选择什么？")
+        self.playlist_button_2.setIcon(QtGui.QIcon('icon/game.jpg'))
         self.playlist_button_2.setIconSize(QtCore.QSize(100, 100))
         self.playlist_button_2.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_3 = QtWidgets.QToolButton()
-        self.playlist_button_3.setText("那些你熟悉又不知道名字…")
-        self.playlist_button_3.setIcon(QtGui.QIcon('./p3.jpg'))
+        self.playlist_button_3.setText("语滴倾力制作，剧情游戏！")
+        self.playlist_button_3.setIcon(QtGui.QIcon('icon/game.jpg'))
         self.playlist_button_3.setIconSize(QtCore.QSize(100, 100))
         self.playlist_button_3.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_4 = QtWidgets.QToolButton()
-        self.playlist_button_4.setText("那些只听前奏就中毒的英文歌")
-        self.playlist_button_4.setIcon(QtGui.QIcon('./p4.jpg'))
+        self.playlist_button_4.setText("OMG，听我的，玩它！")
+        self.playlist_button_4.setIcon(QtGui.QIcon('icon/game.jpg'))
         self.playlist_button_4.setIconSize(QtCore.QSize(100, 100))
         self.playlist_button_4.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
@@ -195,30 +194,6 @@ class MainUi(QtWidgets.QMainWindow):
         self.right_layout.addWidget(self.right_newquestion_widget, 5, 0, 1, 5)
         self.right_layout.addWidget(self.right_playlist_widget, 5, 5, 1, 4)
 
-
-        # self.right_process_bar = QtWidgets.QProgressBar()  # 播放进度部件
-        # self.right_process_bar.setValue(49)
-        # self.right_process_bar.setFixedHeight(3)  # 设置进度条高度
-        # self.right_process_bar.setTextVisible(False)  # 不显示进度条文字
-
-        # self.right_playconsole_widget = QtWidgets.QWidget()  # 播放控制部件
-        # self.right_playconsole_layout = QtWidgets.QGridLayout()  # 播放控制部件网格布局层
-        # self.right_playconsole_widget.setLayout(self.right_playconsole_layout)
-
-        # self.console_button_1 = QtWidgets.QPushButton(qtawesome.icon('fa.backward', color='#0A1D37'), "")
-        # self.console_button_2 = QtWidgets.QPushButton(qtawesome.icon('fa.forward', color='#0A1D37'), "")
-        # self.console_button_3 = QtWidgets.QPushButton(qtawesome.icon('fa.pause', color='#0A1D37', font=18), "")
-        # self.console_button_3.setIconSize(QtCore.QSize(30, 30))
-
-        # self.right_playconsole_layout.addWidget(self.console_button_1, 0, 0)
-        # self.right_playconsole_layout.addWidget(self.console_button_2, 0, 2)
-        # self.right_playconsole_layout.addWidget(self.console_button_3, 0, 1)
-        # self.right_playconsole_layout.setAlignment(QtCore.Qt.AlignCenter)  # 设置布局内部件居中显示
-
-        # self.right_layout.addWidget(self.right_process_bar, 9, 0, 1, 9)
-        # self.right_layout.addWidget(self.right_playconsole_widget, 10, 0, 1, 9)
-
-
         self.left_close.setFixedSize(15,15) # 设置关闭按钮的大小
         self.left_visit.setFixedSize(15, 15)  # 设置按钮大小
         self.left_mini.setFixedSize(15, 15) # 设置最小化按钮大小
@@ -229,7 +204,7 @@ class MainUi(QtWidgets.QMainWindow):
 
         self.left_widget.setStyleSheet('''
             QWidget#left_widget{
-                background:gray;
+                background:#77ACF1;
                 border-top:1px solid white;
                 border-bottom:1px solid white;
                 border-left:1px solid white;
@@ -247,13 +222,6 @@ class MainUi(QtWidgets.QMainWindow):
             QPushButton#left_button:hover{border-left:4px solid #0A1D37;font-weight:700;}
         ''')
 
-        # self.right_bar_widget_search_input.setStyleSheet(
-        # '''QLineEdit{
-        #         border:1px solid gray;
-        #         width:300px;
-        #         border-radius:10px;
-        #         padding:2px 4px;
-        # }''')
 
         self.right_widget.setStyleSheet('''
             QWidget#right_widget{
@@ -303,32 +271,7 @@ class MainUi(QtWidgets.QMainWindow):
             }
         ''')
 
-        # self.right_process_bar.setStyleSheet('''
-        #     QProgressBar::chunk {
-        #         background-color: #0A1D37;
-        #     }
-        # ''')
-
-        # self.right_playconsole_widget.setStyleSheet('''
-        #     QPushButton{
-        #         border:none;
-        #     }
-        # ''')
-
-        self.setWindowOpacity(0.95) # 设置窗口透明度
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground) # 设置窗口背景透明
-
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint) # 隐藏边框
-
-
+        MainWindow.setWindowOpacity(0.95) # 设置窗口透明度
+        MainWindow.setAttribute(QtCore.Qt.WA_TranslucentBackground) # 设置窗口背景透明
+        MainWindow.setWindowFlag(QtCore.Qt.FramelessWindowHint) # 隐藏边框
         self.main_layout.setSpacing(0)
-
-
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    gui = MainUi()
-    gui.show()
-    sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    main()
