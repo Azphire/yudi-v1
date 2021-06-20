@@ -1,9 +1,9 @@
 import pymysql
-HOST='121.199.77.139'
+HOST=''
 PORT=3306
-USER='yudi'
-PASSWORD='123'
-DB='Yudi'
+USER=''
+PASSWORD=''
+DB=''
 CHARSET='utf8mb4'
 
 class MySQLConnection(object):
