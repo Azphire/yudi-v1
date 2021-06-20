@@ -5,9 +5,9 @@ import speech_recognition as sr
 import time
 
 # Baidu Speech API
-APP_ID = '24398244'
-API_KEY = 'tvMrgpcmEeKiAPDWfhAG0EKl'
-SECRET_KEY = '4OHO7ClRWVKgi7S9mgkK4P5oSINFki0W'
+APP_ID = ''
+API_KEY = ''
+SECRET_KEY = ''
 
 client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
