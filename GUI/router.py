@@ -2,6 +2,7 @@ from homeui import*
 from subui_one import*
 from subui_two import*
 from subui_three import*
+from subui_game import*
 import sys
 # sys.path.append(r'D:\\UCI\\YUDI-V1-MAIN')
 sys.path.append(os.path.abspath('..'))

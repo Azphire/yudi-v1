@@ -2,7 +2,7 @@ from PyQt5 import QtCore,QtGui,QtWidgets
 import sys
 import qtawesome
 import os
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal,Qt
 
 class MainUi(QtWidgets.QMainWindow):
     def setupUi(self,MainWindow):
@@ -161,33 +161,33 @@ class MainUi(QtWidgets.QMainWindow):
         self.right_playlist_widget.setLayout(self.right_playlist_layout)
 
         self.playlist_button_1 = QtWidgets.QToolButton()
-        self.playlist_button_1.setText("体验一段小说中的剧情~")
-        self.playlist_button_1.setIcon(QtGui.QIcon('icon/game.jpg'))
-        self.playlist_button_1.setIconSize(QtCore.QSize(120, 100))
+        self.playlist_button_1.setText("快来体验一段小说中的人生~   ")
+        self.playlist_button_1.setIcon(QtGui.QIcon('../icon/game.jpg'))
+        self.playlist_button_1.setIconSize(QtCore.QSize(125, 125))
         self.playlist_button_1.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_2 = QtWidgets.QToolButton()
         self.playlist_button_2.setText("生死存亡之际，你会选择什么？")
-        self.playlist_button_2.setIcon(QtGui.QIcon('icon/game.jpg'))
-        self.playlist_button_2.setIconSize(QtCore.QSize(100, 100))
+        self.playlist_button_2.setIcon(QtGui.QIcon('../icon/game.jpg'))
+        self.playlist_button_2.setIconSize(QtCore.QSize(125, 125))
         self.playlist_button_2.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_3 = QtWidgets.QToolButton()
-        self.playlist_button_3.setText("语滴倾力制作，剧情游戏！")
-        self.playlist_button_3.setIcon(QtGui.QIcon('icon/game.jpg'))
-        self.playlist_button_3.setIconSize(QtCore.QSize(100, 100))
+        self.playlist_button_3.setText("语滴联合三体倾情制作！      ")
+        self.playlist_button_3.setIcon(QtGui.QIcon('../icon/game.jpg'))
+        self.playlist_button_3.setIconSize(QtCore.QSize(125, 125))
         self.playlist_button_3.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
         self.playlist_button_4 = QtWidgets.QToolButton()
-        self.playlist_button_4.setText("OMG，听我的，玩它！")
-        self.playlist_button_4.setIcon(QtGui.QIcon('icon/game.jpg'))
-        self.playlist_button_4.setIconSize(QtCore.QSize(100, 100))
+        self.playlist_button_4.setText("OMG，听我的，玩它！         ")
+        self.playlist_button_4.setIcon(QtGui.QIcon('../icon/game.jpg'))
+        self.playlist_button_4.setIconSize(QtCore.QSize(125, 125))
         self.playlist_button_4.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
-        self.right_playlist_layout.addWidget(self.playlist_button_1,0,0)
-        self.right_playlist_layout.addWidget(self.playlist_button_2, 0, 1)
-        self.right_playlist_layout.addWidget(self.playlist_button_3, 1, 0)
-        self.right_playlist_layout.addWidget(self.playlist_button_4, 1, 1)
+        self.right_playlist_layout.addWidget(self.playlist_button_1,0,0,1,1)
+        self.right_playlist_layout.addWidget(self.playlist_button_2, 0, 1,1,1)
+        self.right_playlist_layout.addWidget(self.playlist_button_3, 1, 0,1,1)
+        self.right_playlist_layout.addWidget(self.playlist_button_4, 1, 1,1,1)
 
         self.right_layout.addWidget(self.right_newquestion_lable, 4, 0, 1, 5)
         self.right_layout.addWidget(self.right_playlist_lable, 4, 5, 1, 4)
@@ -249,6 +249,7 @@ class MainUi(QtWidgets.QMainWindow):
             ''')
         self.right_playlist_widget.setStyleSheet(
             '''
+
                 QToolButton{border:none;}
                 QToolButton:hover{border-bottom:2px solid #0A1D37;}
             ''')
