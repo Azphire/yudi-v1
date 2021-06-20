@@ -6,6 +6,7 @@ from pprint import pprint
 from BaiduApiAccess.TTS_STT import say,listen
 from DataAccess.PassageAccess import getCHNPassageTitles,getCHNPassageById
 
+BIAODIAN='，|。|？|！|、|,|\.|?|!'
 
 def getErrMsg(text1,text2):
     m={'-':[],'+':[],'?':[]}
@@ -50,8 +51,8 @@ def recite_whole():
     say("预备，开始：")
     ans=listen()
     say("背诵完毕，正在解析")
-    ans=[s for s in re.split('，|。|,|\.', ans) if s.strip()!='']
-    sentences = [s for s in re.split('，|。|,|\.', passage['content']) if s.strip()!='']
+    ans=[s for s in re.split(BIAODIAN, ans) if s.strip()!='']
+    sentences = [s for s in re.split(BIAODIAN, passage['content']) if s.strip()!='']
     res=getErrMsg(sentences,ans)
     say("解析完毕")
     if len(res['?'])>0:
