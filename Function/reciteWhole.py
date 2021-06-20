@@ -1,12 +1,12 @@
 import random
 import re
-import  difflib
-from pprint import pprint
+import difflib
 
 from BaiduApiAccess.TTS_STT import say,listen
 from DataAccess.PassageAccess import getCHNPassageTitles,getCHNPassageById
 
-BIAODIAN='，|。|？|！|、|,|\.|?|!'
+# BIAODIAN='，|。|？|！|、|,|\.|?|!'
+BIAODIAN='，|。|,|\.|？|\?|！|\!'
 
 def getErrMsg(text1,text2):
     m={'-':[],'+':[],'?':[]}
@@ -68,4 +68,9 @@ def recite_whole():
         say("恭喜你！没有错误！")
 
 if __name__ == "__main__":
-    recite_whole()
+    # recite_whole()
+    arr=re.split(BIAODIAN,"葡萄美酒夜光杯，欲饮琵琶马上催!醉卧沙场君莫笑，古来征战几人回?")
+    arr=[a for a in arr if a.strip()!='']
+    arr=re.split(BIAODIAN,"远看大石头，近看石头大。")
+    arr = [a for a in arr if a.strip() != '']
+    print("any")
