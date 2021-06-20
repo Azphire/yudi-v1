@@ -1,4 +1,6 @@
 # yudi-v1
 语滴项目v1
 
-干巴爹！
+Python
+
+百度api
